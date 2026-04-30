@@ -9,13 +9,10 @@ using SERVICEAPP.ServiceLayer;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = Environment.GetEnvironmentVariable("DbDockerConnection") ??
-                        builder.Configuration.GetConnectionString("DefaultConnection");
-
 builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseSqlServer(connectionString);
-});
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+    ));
 
 
 // Add services to the container.
