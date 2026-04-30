@@ -11,10 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseSqlServer(connectString);
-});
+//builder.Services.AddDbContext<AppDbContext>(options =>
+//{
+//    options.UseSqlServer(connectString);
+//});
 
 // Add services to the container.
 
@@ -124,9 +124,12 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    //app.UseSwagger();
+    //app.UseSwaggerUI();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 //app.UseHttpsRedirection();
 // Enable serving static files from wwwroot
