@@ -82,6 +82,7 @@ builder.Services.AddCors(options =>
                     )
                         .AllowAnyMethod()
                         .AllowAnyHeader()
+                        .AllowCredentials()
                         );
 });
 
@@ -99,7 +100,8 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
+app.UseRouting();
 //app.UseCors("AllowAngular");
 app.UseCors("AllowAll");
 
