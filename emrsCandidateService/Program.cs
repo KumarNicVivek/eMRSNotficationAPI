@@ -9,13 +9,15 @@ using SERVICEAPP.ServiceLayer;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = Environment.GetEnvironmentVariable("DbDockerConnection") ??
-                        builder.Configuration.GetConnectionString("DefaultConnection");
+//var connectionString = Environment.GetEnvironmentVariable("DbDockerConnection") ??
+//                        builder.Configuration.GetConnectionString("DefaultConnection");
 
-//builder.Services.AddDbContext<AppDbContext>(options =>
-//{
-//    options.UseSqlServer(connectionString);
-//});
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlServer(connectionString);
+});
 
 
 // Add services to the container.
@@ -51,6 +53,7 @@ builder.Services.AddScoped<IVisitorService, VisitorService>();
 #endregion
 
 #region Cors
+
 //builder.Services.AddCors(options =>
 //{
 //    options.AddPolicy("AllowAngular",
