@@ -66,12 +66,23 @@ builder.Services.AddScoped<IVisitorService, VisitorService>();
 //        });
 //});
 
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowAll",
+//        policy => policy.AllowAnyOrigin()
+//                        .AllowAnyMethod()
+//                        .AllowAnyHeader());
+//});
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
-        policy => policy.AllowAnyOrigin()
+        policy => policy.WithOrigins(
+                        "https://agreeable-hill-03b7cfc00.7.azurestaticapps.net"
+                    )
                         .AllowAnyMethod()
-                        .AllowAnyHeader());
+                        .AllowAnyHeader()
+                        );
 });
 
 #endregion
