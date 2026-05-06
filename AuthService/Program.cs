@@ -87,13 +87,14 @@ builder.Services.AddMemoryCache();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("DevCors",
-        builder =>
-        {
-            builder.AllowAnyOrigin()
-                   .AllowAnyMethod()
-                   .AllowAnyHeader();
-        });
+    options.AddPolicy("AllowAll",
+        policy => policy.WithOrigins(
+                        "https://emrsauthapi-akdffyedgnbecaha.canadacentral-01.azurewebsites.net/"
+                    )
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials()
+                        );
 });
 
 #region Repository Layer
@@ -134,7 +135,7 @@ app.UseSwaggerUI();
 //app.UseHttpsRedirection();
 // Enable serving static files from wwwroot
 app.UseStaticFiles();
-app.UseCors("DevCors");
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 
