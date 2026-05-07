@@ -258,6 +258,7 @@ namespace AuthService.Controllers
 
             // Build absolute URL
             string baseUrl = $"{Request.Scheme}://{Request.Host}";
+            
             //string baseUrl = _configuration["AppSettings:BaseUrl"] ?? $"{Request.Scheme}://{Request.Host}";
             string imageUrl = $"{baseUrl}{imagePath}";
 
