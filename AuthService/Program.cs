@@ -146,7 +146,7 @@ app.UseSwaggerUI();
 //app.UseHttpsRedirection();
 // Enable serving static files from wwwroot
 app.UseStaticFiles();
-app.UseCors("DevCors");
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 
