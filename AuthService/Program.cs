@@ -85,15 +85,27 @@ builder.Services.AddSwaggerGen(options =>
 // Register Memory Cache (Required for CAPTCHA)
 builder.Services.AddMemoryCache();
 
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("DevCors",
+//        builder =>
+//        {
+//            builder.AllowAnyOrigin()
+//                   .AllowAnyMethod()
+//                   .AllowAnyHeader();
+//        });
+//});
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("DevCors",
-        builder =>
-        {
-            builder.AllowAnyOrigin()
-                   .AllowAnyMethod()
-                   .AllowAnyHeader();
-        });
+    options.AddPolicy("AllowAll",
+        policy => policy.WithOrigins(
+                        "https://emrsauthapi-akdffyedgnbecaha.canadacentral-01.azurewebsites.net/"
+                    )
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials()
+                        );
 });
 
 #region Repository Layer
