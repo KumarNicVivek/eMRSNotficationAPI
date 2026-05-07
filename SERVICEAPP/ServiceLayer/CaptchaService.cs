@@ -47,6 +47,37 @@ namespace SERVICEAPP.ServiceLayer
             return $"/captchas/{fileName}";
         }
 
+
+        public string GenerateCaptchaBase64(out string captchaText)
+        {
+            var rnd = new Random();
+
+            captchaText = rnd.Next(1000000, 9999999).ToString();
+
+            using (var bmp = new Bitmap(180, 60))
+            using (var gfx = Graphics.FromImage(bmp))
+            using (var font = new Font("Arial", 28, FontStyle.Bold))
+            using (var ms = new MemoryStream())
+            {
+                gfx.Clear(Color.LightYellow);
+
+                gfx.DrawString(
+                    captchaText,
+                    font,
+                    Brushes.DarkBlue,
+                    new PointF(20, 10));
+
+                // optional noise lines
+                //gfx.DrawLine(Pens.LightGray, 0, 0, 180, 60);
+                //gfx.DrawLine(Pens.LightGray, 0, 60, 180, 0);
+
+                bmp.Save(ms, ImageFormat.Png);
+
+                byte[] imageBytes = ms.ToArray();
+
+                return Convert.ToBase64String(imageBytes);
+            }
+        }
         public bool ValidateCaptcha(string userInput, string sessionCaptcha)
         {
             throw new NotImplementedException();

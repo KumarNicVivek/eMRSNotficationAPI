@@ -245,10 +245,12 @@ namespace AuthService.Controllers
         public IActionResult RefreshCaptcha()
         {
             string captchaText;
-            string relativePath = _captchaService.GenerateCaptchaImage(out captchaText);
+            //string relativePath = _captchaService.GenerateCaptchaImage(out captchaText);
+
+            string imageBase64 = _captchaService.GenerateCaptchaBase64(out captchaText);
 
             // Convert "~/captchas/xyz.png" to "/captchas/xyz.png"
-            string imagePath = relativePath.Replace("~", "");
+            //string imagePath = relativePath.Replace("~", "");
 
             // Generate unique key
             string captchaKey = Guid.NewGuid().ToString();
@@ -261,12 +263,12 @@ namespace AuthService.Controllers
             
             //string baseUrl = _configuration["AppSettings:BaseUrl"] ?? $"{Request.Scheme}://{Request.Host}";
             
-            string imageUrl = $"{baseUrl}{imagePath}";
+            //string imageUrl = $"{baseUrl}{imagePath}";
 
             return Ok(new
             {
                 captchaKey,
-                imageUrl
+                imageUrl = $"data:image/png;base64,{imageBase64}"
             });
         }
     }
