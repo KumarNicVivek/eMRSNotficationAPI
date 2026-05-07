@@ -257,8 +257,8 @@ namespace AuthService.Controllers
             _memoryCache.Set(captchaKey, captchaText, TimeSpan.FromMinutes(5));
 
             // Build absolute URL
-            //string baseUrl = $"{Request.Scheme}://{Request.Host}";
-            string baseUrl = _configuration["AppSettings:BaseUrl"] ?? $"{Request.Scheme}://{Request.Host}";
+            string baseUrl = $"{Request.Scheme}://{Request.Host}";
+            //string baseUrl = _configuration["AppSettings:BaseUrl"] ?? $"{Request.Scheme}://{Request.Host}";
             string imageUrl = $"{baseUrl}{imagePath}";
 
             return Ok(new
