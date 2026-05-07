@@ -260,6 +260,7 @@ namespace AuthService.Controllers
             string baseUrl = $"{Request.Scheme}://{Request.Host}";
             
             //string baseUrl = _configuration["AppSettings:BaseUrl"] ?? $"{Request.Scheme}://{Request.Host}";
+            
             string imageUrl = $"{baseUrl}{imagePath}";
 
             return Ok(new
